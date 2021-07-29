@@ -57,7 +57,6 @@ router.get('/:id', async (req, res) => {
         .filter({ 'o.id': orderId })
         .getAll()
         .then(orders => {
-            console.log(orders);
             if (orders.length > 0) {
                 res.json(orders);
             } else {
@@ -114,7 +113,7 @@ router.post('/new', async (req, res) => {
                     res.json({ message: 'New order failed while adding order details', success: false });
                 }
                 res.json({
-                    message: `Order successfully placed with order id ${newOrderId}`,
+                    message: `Order successfully placed with order id ${newOrderId.insertId}`,
                     success: true,
                     order_id: newOrderId.insertId,
                     products: products
@@ -130,10 +129,9 @@ router.post('/new', async (req, res) => {
 // Payment Gateway
 router.post('/payment', (req, res) => {
     setTimeout(() => {
-        res.status(200).json({ success: true });
+        res.status(200).json({success: true});
     }, 3000)
 });
-
 
 
 
